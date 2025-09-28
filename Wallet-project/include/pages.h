@@ -3,6 +3,10 @@
 #include <cstdlib>
 #include <memory>
 #include <cstring>
+
+#include <algorithm> // for std::all_of
+#include <cctype>    // for std::isdigit
+
 #include "application.h"
 #include "login_service.h"
 
@@ -69,7 +73,7 @@ class MainPage : public Page
 class WithdrawalPage : public Page
 {
     protected:
-        int _amount;
+        double _amount;
 
     public:
         WithdrawalPage(App* app);

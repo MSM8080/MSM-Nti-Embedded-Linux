@@ -33,8 +33,6 @@ void PageNavigator::navigate()
         // change page according to prompt
         this->change_page();
     }
-
-    std::cout << "\033[1;36m## Thanks for using our services\033[0m" << std::endl;
     return ;
 }
 

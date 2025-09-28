@@ -16,8 +16,9 @@ class App
     public:
         App(const App&) = delete;
         App() = delete;
-        App(std::string users_path, std::string transictions_path);
+        App(const std::string& users_path, std::string transictions_path);
         void run();
+        void save_app_data();
 
         // get functions
         UserRepo* get_current_repo();

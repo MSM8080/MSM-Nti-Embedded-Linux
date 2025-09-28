@@ -36,13 +36,22 @@ CSVFileRead::CSVFileRead(const std::string &file_path) : _file_empty(1)
 {
     // initilze input file
     _i_file = std::make_unique<std::fstream>();
-    _i_file->open(file_path,std::ios::in);
+    // file_path
+    _i_file->open("user_sample.csv",std::ios::in);
 
     // check if input file is open ??
     if (_i_file->is_open())
+    {
+        std::cout << "user file is opened as input\n";
         _file_exist = 1;
+    }    
+    
     else
+    {
         _file_exist = 0;
+        std::cout << "user file is not opened as input\n";
+    }
+        
 
     // get the number of rows
     std::string line;
