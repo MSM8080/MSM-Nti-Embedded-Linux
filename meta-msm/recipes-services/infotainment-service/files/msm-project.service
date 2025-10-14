@@ -1,0 +1,34 @@
+[Unit]
+Description=Qt QML + Python/C++ Combined App
+After=multi-user.target
+Requires=multi-user.target
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sleep 15
+ExecStart=/usr/bin/msm-launcher.sh
+User=weston
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=SHELL=/bin/sh
+Environment=COLORTERM=xterm
+Environment=XDG_SEAT=seat0
+Environment=PWD=/home/weston
+Environment=XDG_SESSION_DESKTOP=weston
+Environment=LOGNAME=weston
+Environment=XDG_SESSION_TYPE=wayland
+Environment=HOME=/home/weston
+Environment=LANG=C
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=WESTON_CONFIG_FILE=/etc/xdg/weston/weston.ini
+Environment=XDG_SESSION_CLASS=user
+Environment=TERM=xterm
+Environment=USER=weston
+Environment=XDG_VTNR=7
+Environment=XDG_SESSION_ID=C1
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+
+[Install]
+WantedBy=graphical.target

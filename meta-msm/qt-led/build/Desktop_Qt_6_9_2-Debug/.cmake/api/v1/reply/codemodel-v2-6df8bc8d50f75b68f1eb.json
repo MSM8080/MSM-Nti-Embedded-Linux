@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-9288cbabba022d37671c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "qt-led",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "qt-led::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qt-led-Debug-4efb550590bfed923c54.json",
+					"name" : "qt-led",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qt-led_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qt-led_autogen-Debug-19b6e8f0af0abebf94b3.json",
+					"name" : "qt-led_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qt-led_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qt-led_autogen_timestamp_deps-Debug-6b925cd1280e73b5c8b4.json",
+					"name" : "qt-led_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/msm/Desktop/2.Technical/3.yocto/days/day_5/task-1/qt-led/build/Desktop_Qt_6_9_2-Debug",
+		"source" : "/home/msm/Desktop/2.Technical/3.yocto/days/day_5/task-1/qt-led"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

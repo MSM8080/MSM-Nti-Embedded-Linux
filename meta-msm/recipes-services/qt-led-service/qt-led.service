@@ -1,0 +1,11 @@
+[uint]
+Description="qt-led service"
+
+[service]
+ExecStart=/usr/bin/qt-led
+Type=simple
+
+[Install]
+WantedBy=multi-user.targetz
+
+
