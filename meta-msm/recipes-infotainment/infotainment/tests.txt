@@ -1,0 +1,150 @@
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/* Test CSV Classes*/
+    std::string path = "/home/msm/Desktop/2.Technical/6.final-project/the_project/users_data.txt";
+    std::vector<std::vector<std::string>> data;
+    // ------------------------------------------------------
+    /* Test CSVRead */
+    {
+
+        CSVRead file{path};
+
+        file.load_file();
+        qDebug() << " {Reading case} " << file.is_exist();
+        qDebug() << " {Reading case} " << file.is_empty();
+
+        data = file.get_data();
+        file.print_file();
+    }
+    // ------------------------------------------------------
+    /* Test change data value */
+    data[1][2] = "witcher";
+    data[2][1] = "sir.emad";
+    // ------------------------------------------------------
+    /* Test CSVWrite*/
+    {
+        CSVWriter file{path,data};
+        qDebug() << " {Reading case} " << file.is_exist();
+        file.print_file();
+        file.update_file();
+    }
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/* Test User & Repo */
+
+// std::string path = "/home/msm/Desktop/2.Technical/6.final-project/msm_project/users_data.txt";
+// User user{};
+// UserRepo repo{path};
+
+// qDebug() << " {repo} " << repo.is_exist();
+// qDebug() << " {repo} " << repo.is_empty();
+
+// repo.print_repo();
+
+// user = repo.get_user_by_id("1");
+
+// qDebug() << " {user} " << user.get_id();
+// qDebug() << " {user} " << user.get_name();
+// qDebug() << " {user} " << user.get_passwd();
+// qDebug() << " {user} " << user.get_theme();
+
+// user.set_name("msm");
+// user.set_passwd("semoo");
+// user.set_theme("cyberpunk");
+
+// repo.update_repo(user);
+// repo.print_repo();
+
+// repo.store_repo();
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#include <QCoreApplication>
+#include <QSerialPort>
+#include <QTextStream>
+#include <QTimer>
+#include <iostream>
+
+class SerialHandler : public QObject
+{
+    Q_OBJECT
+public:
+    explicit SerialHandler(QObject *parent = nullptr)
+        : QObject(parent)
+    {
+        connect(&serial, &QSerialPort::readyRead, this, &SerialHandler::onReadyRead);
+    }
+
+    void openPort(const QString &portName)
+    {
+        serial.setPortName(portName);
+        serial.setBaudRate(QSerialPort::Baud9600);
+        serial.setDataBits(QSerialPort::Data8);
+        serial.setParity(QSerialPort::NoParity);
+        serial.setStopBits(QSerialPort::OneStop);
+        serial.setFlowControl(QSerialPort::NoFlowControl);
+
+        if (serial.open(QIODevice::ReadWrite)) {
+            qDebug() << "✅ Connected to" << portName;
+            QTimer::singleShot(1000, this, &SerialHandler::sendInitialMessage);
+        } else {
+            qDebug() << "❌ Failed to open port:" << serial.errorString();
+        }
+    }
+
+signals:
+    void messageReceived(const QString &msg);
+
+private slots:
+    void onReadyRead()
+    {
+        QByteArray data = serial.readAll();
+        buffer += data;
+
+        // لو وصلت newline، نعتبرها رسالة كاملة
+        if (buffer.contains('\n')) {
+            QString message = QString::fromUtf8(buffer).trimmed();
+            buffer.clear();
+            emit messageReceived(message);
+        }
+    }
+
+    void sendInitialMessage()
+    {
+        QString msg = "Hello from Qt!\n";
+        serial.write(msg.toUtf8());
+        qDebug() << "📤 Sent:" << msg.trimmed();
+    }
+
+private:
+    QSerialPort serial;
+    QByteArray buffer;
+};
+
+int main(int argc, char *argv[])
+{
+    QCoreApplication app(argc, argv);
+
+    SerialHandler handler;
+
+    QObject::connect(&handler, &SerialHandler::messageReceived,
+                     [](const QString &msg) {
+                         qDebug() << "📩 Received from Arduino:" << msg;
+                     });
+
+    handler.openPort("/dev/ttyACM0");
+
+    return app.exec();
+}
+
+#include "main.moc"
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
