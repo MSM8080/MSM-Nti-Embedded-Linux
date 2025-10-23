@@ -12,5 +12,8 @@ Here’s a high-level overview of the directory structure:
 - **cpp-socket** --> C++ socket {server/clinet} programming module  
 - **dash-board-qt** --> Car dashboard GUI written in Qt-C++   
 - **meta-msm**: BitBake/Yocto meta-layer for embedded Linux customized image {my Nti final project}
-- **qt-led** --> Qt-C++ application for controlling LEDs using GPIO pins of raspberry pi 3 
+- **qt-led** --> Qt-C++ application for controlling LEDs using GPIO pins of raspberry pi 3
+- **rpi-3b-boot-files** --> directory containing boot files for raspberry pi 3 manual image building 
+- **rpi-3b-plus-boot-files** --> directory containing boot files for raspberry pi 3 B+ manual image building 
+- **vexpress-a9-boot-files** --> directory containing boot files for cortex A9 manual image building to run on QEMU emulator
 
